@@ -1,5 +1,5 @@
 ---
-title: 6차시 7:Quantum algorithmic foundations (Classical computations on quantum computers)
+title: 6차시 7:Fundamentals of quantum algorithms(Classical computations on quantum computers)
 layout: single
 classes: wide
 categories:

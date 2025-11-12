@@ -1,5 +1,5 @@
 ---
-title: 2차시 1:Linear Algebra(Dave)
+title: 1차시 1:Linear Algebra(Dave)
 layout: single
 classes: wide
 categories:
@@ -40,21 +40,21 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 
 연립 선형 방정식의 해는 우리가 기하학적으로 어떻게 시각화하느냐에 따라 의미가 달라집니다.
 
-1. 변수가 두 개인 경우 (예: $x, y$)
+1. 변수가 두 개인 경우 (예: $x, y$):
 각 선형 방정식은 좌표 평면에서 **직선**을 나타냅니다. 연립 방정식의 해는 **두 직선이 만나는 교점**이 됩니다.
 * **유일한 해**: 두 직선이 한 점에서 만날 때 (딱 하나의 해).
 * **해가 없는 경우**: 두 직선이 평행해서 만나지 않을 때.
 * **무수히 많은 해**: 두 방정식이 사실상 같은 직선을 나타낼 때 (모든 점이 해).
 
-2. 변수가 세 개인 경우 (예: $x, y, z$)
+2. 변수가 세 개인 경우 (예: $x, y, z$):
 각 선형 방정식은 3차원 공간에서 **평면**을 나타냅니다. 해는 **세 평면이 만나는 교점이나 교선**이 됩니다.
 * **유일한 해**: 세 평면이 한 점에서 만날 때.
 * **무수히 많은 해**:
-    * 세 평면이 한 선을 따라 만날 때.
-    * 세 방정식이 모두 같은 평면을 나타낼 때.
+  * 세 평면이 한 선을 따라 만날 때.
+  * 세 방정식이 모두 같은 평면을 나타낼 때.
 * **해가 없는 경우**: 세 평면이 평행하거나 다른 방식으로 만나지 않을 때.
 
-3. 변수가 네 개 이상인 경우
+3. 변수가 네 개 이상인 경우:
 이 경우에는 더 이상 **기하학적으로 그림을 그리기 어렵습니다**. 그래서 선형대수학에서 배우는 다른 개념과 도구들을 활용해 문제를 해결해야 합니다.
 
 ### 1.5 시스템의 일관성 (Consistency)
@@ -179,6 +179,9 @@ $ $ $$\begin{pmatrix}
 ### 3.5 **해의 개수 파악하기: 랭크 (Rank)**
 
 가우스-조르단 소거법이 완료되어 행렬이 기약 행 사다리꼴이 되면, 시스템에 해가 몇 개 있는지 알 수 있습니다. 이를 위해 **랭크(Rank)**라는 개념을 사용합니다. **랭크**는 기약 행 사다리꼴에서 **선행 1의 개수**를 의미합니다.
+  * 랭크는 행렬이 표현하는 “정보의 차원 수(dimension)”를 나타냅니다. 그래서 행을 기준으로 보나, 열을 기준으로 보나 결국 같은 공간의 차원을 나타내기 때문에 같다.
+  * "랭크는 행과 열에서 동일하다”는 건 같은 행렬 내부의 성질,
+“계수행렬과 첨가행렬의 랭크를 비교한다”는 건 두 행렬의 차이로 해의 존재를 판정하는 것입니다.
 
 랭크를 통해 해의 개수를 판단하는 방법은 다음과 같습니다:
 
@@ -271,6 +274,11 @@ $ $ $$\begin{pmatrix}
 $a_{i1} \times b_{1j} + a_{i2} \times b_{2j} + \dots + a_{in} \times b_{nj}$
 
 이처럼 행렬 곱셈은 단순히 숫자를 곱하는 것이 아니라, 정해진 규칙에 따라 행과 열의 원소들을 짝지어 곱하고 더하는 독특한 방식입니다.
+
+### 5.4 행렬에 대한 곱셈 연산은 크게 세 가지로 구분
+- 스칼라 곱 (Scalar Multiplication)
+- 행렬 원소 간의 곱 (Element-wise Product) - 아다마르 곱: A⊙B (또는 A∘B)
+- 행렬 곱 (Matrix Multiplication) - 표준 곱셈: AB
 
 ## 6. 행렬식 구하는 방법
 - 출처: [Evaluating the Determinant of a Matrix](https://www.youtube.com/watch?v=CcbyMH3Noow&list=PLybg94GvOJ9En46TNCXL2n6SiqRc_iMB8&index=6)
@@ -419,6 +427,65 @@ $a_{i1} \times b_{1j} + a_{i2} \times b_{2j} + \dots + a_{in} \times b_{nj}$
 ### **7.9 외적은 어디에 쓰이나요?**
 
 * 외적은 **물리학**에서 힘, 토크, 자기장 등 다양한 개념을 설명할 때 아주 중요하게 사용됩니다.
+
+### 7. 10 행렬의 내적 정의 및 예제
+
+행렬의 내적(Inner Product of Matrices)은 일반적으로 두 행렬이 주어졌을 때, 행렬 자체의 **내적**이라기보다는 행렬을 벡터 공간의 원소로 간주하고 정의하는 경우가 많습니다. 가장 흔하고 표준적인 행렬 간의 내적은 **프로베니우스 내적 (Frobenius Inner Product)**입니다. 내적(Inner Product)은 단순히 계산을 위한 연산을 넘어, 벡터 공간에서 길이, 각도, 직교성과 같은 기하학적 개념을 정의하고 측정하는 데 사용되는 핵심 도구  
+
+1\. 프로베니우스 내적의 정의
+* 두 $m \times n$ 행렬 $\mathbf{A}$와 $\mathbf{B}$가 있을 때, 이들의 프로베니우스 내적 $\langle \mathbf{A}, \mathbf{B} \rangle_F$은 다음과 같이 정의됩니다.
+
+$\langle \mathbf{A}, \mathbf{B} \rangle_F = \sum\limits_{i=1}^{m} \sum\limits_{j=1}^{n} a_{ij} b_{ij}$
+
+여기서 $a_{ij}$와 $b_{ij}$는 각각 행렬 $\mathbf{A}$와 $\mathbf{B}$의 $(i, j)$ 번째 원소입니다.
+
+**핵심:** 이는 두 행렬의 **대응되는 위치의 원소들을 곱한 후, 그 결과를 모두 더하는** 연산입니다.
+
+2\. 간단한 예제
+두 $2 \times 2$ 행렬 $\mathbf{A}$와 $\mathbf{B}$를 사용하여 프로베니우스 내적을 계산해 보겠습니다.
+
+* **행렬 $\mathbf{A}$:**
+    $$\mathbf{A} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$$
+
+* **행렬 $\mathbf{B}$:**
+    $$\mathbf{B} = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$$
+
+**계산:**
+
+정의 $\langle \mathbf{A}, \mathbf{B} \rangle_F = \sum\limits_{i=1}^{m} \sum\limits_{j=1}^{n} a_{ij} b_{ij}$ 에 따라 대응되는 원소들을 곱하여 더합니다.
+
+$\langle \mathbf{A}, \mathbf{B} \rangle_F = (1 \times 5) + (2 \times 6) + (3 \times 7) + (4 \times 8)$
+$\langle \mathbf{A}, \mathbf{B} \rangle_F = 5 + 12 + 21 + 32$
+$\langle \mathbf{A}, \mathbf{B} \rangle_F = 70$
+
+따라서, 두 행렬 $\mathbf{A}$와 $\mathbf{B}$의 프로베니우스 내적은 **70**입니다.
+
+* 내적은 주로 **$\mathbf{A} \cdot \mathbf{B}$**로 표시하며, 학문적 맥락에 따라 **$\langle \mathbf{A}, \mathbf{B} \rangle$**나 **$\mathbf{A}^T \mathbf{B}$**로도 표시합니다.
+
+### 7.11 크로네커 곱($\otimes$)
+•	행렬 연산: 행렬 $\mathbf{A}$ (크기 $m \times n$)와 $\mathbf{B}$ (크기 $p \times q$)가 있을 때, 이들을 곱하여 크기가 $(mp) \times (nq)$인 더 큰 블록 행렬을 만듭니다. \
+•	수식: $\mathbf{A} \otimes \mathbf{B}$ \
+•	계산 방식: $\mathbf{A}$의 각 원소 $a_{ij}$에 행렬 $\mathbf{B}$ 전체를 곱하여 새로운 블록을 만듭니다. 
+
+$\mathbf{A} \otimes \mathbf{B}$ = $$\begin{pmatrix} a_{11}\mathbf{B} & a_{12}\mathbf{B} & \dots \\ a_{21}\mathbf{B} & a_{22}\mathbf{B} & \dots \\ \vdots & \vdots & \ddots \end{pmatrix}$$
+
+•	용도: 신호 처리, 행렬 방정식 풀이, 양자 계산 등에서 사용됩니다.
+일반적으로 행렬이나 벡터를 다루는 계산 문제에서 $\otimes$ 기호를 본다면, 크로네커 곱을 의미할 가능성이 가장 높습니다.
+
+양자 컴퓨팅에서 $\otimes$는 텐서 곱이라는 개념으로 시스템의 결합을 정의하고, 크로네커 곱이라는 계산 규칙을 사용하여 그 결합된 시스템의 상태 벡터나 게이트 행렬을 구체적으로 표현하고 계산하는 데 사용됩니다. 즉, 같은 기호로 개념 정의와 계산 구현이 모두 이루어집니다.
+
+### 7.12 주요 연산 정리
+
+## 행렬 곱셈 관련 연산 정리 📝
+
+| 구분 | 정의 (한 줄) | 표기법 1 | 표기법 2 | 적용 대상 | 결과의 특징 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1. 스칼라 곱** | 스칼라를 행렬의 **모든** 원소에 곱하는 연산. | $c A$ | $c \times A$ | 스칼라($c$), 행렬($A$) | 행렬 (크기 유지) |
+| **2. 요소별 행렬 곱** | 크기가 같은 두 행렬의 **대응되는 원소끼리** 곱하는 연산. | $A \odot B$ | $A \circ B$ | 행렬($A, B$) (크기 동일) | 행렬 (크기 유지) |
+| **3. 행렬 곱 (일반)** | 앞 행렬의 **행**과 뒤 행렬의 **열**의 내적으로 원소를 계산하는 연산. | $A B$ | $A \times B$ | 행렬($A, B$) (A열=B행) | 행렬 (새로운 크기) |
+| **4. 크로네커 곱** | 앞 행렬의 각 원소에 뒤 행렬 전체를 곱하여 **블록 행렬**을 만드는 연산. | $A \otimes B$ | - | 행렬($A, B$) (모든 크기) | 행렬 (크기가 커짐) |
+| **5. 내적 (Dot Product)** | 두 벡터의 **대응되는 원소끼리** 곱한 후 **모두 더하는** 연산. | $\mathbf{u} \cdot \mathbf{v}$ | $\langle \mathbf{u}, \mathbf{v} \rangle$ | 벡터($\mathbf{u}, \mathbf{v}$) (차원 동일) | **스칼라** (크기) |
+| **6. 외적 (Cross Product)** | 두 3차원 벡터 모두에 **수직인 새로운 벡터**를 생성하는 연산. | $\mathbf{u} \times \mathbf{v}$ | - | 3차원 벡터($\mathbf{u}, \mathbf{v}$) | **벡터** (3차원) |
 
 ## 8. 역행렬, 대체 뭔가요?
 - 출처: [Inverse Matrices and Their Properties](https://www.youtube.com/watch?v=kWorj5BBy9k&list=PLybg94GvOJ9En46TNCXL2n6SiqRc_iMB8&index=8)

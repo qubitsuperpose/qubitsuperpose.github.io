@@ -1,5 +1,5 @@
 ---
-title: 6차시 8:Phase estimation and factoring (The phase estimation problem)
+title: 6차시 8:Fundamentals of quantum algorithms(The phase estimation problem)
 layout: single
 classes: wide
 categories:

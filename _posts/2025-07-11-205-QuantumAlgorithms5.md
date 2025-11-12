@@ -1,5 +1,5 @@
 ---
-title: 6차시 5:Quantum algorithmic foundations (Factoring and GCDs)
+title: 6차시 5:Fundamentals of quantum algorithms(Factoring and GCDs)
 layout: single
 classes: wide
 categories:

@@ -705,3 +705,182 @@ Here are two plots showing the probabilities for three consecutive values for $y
 
 ![Plot showing outcome probabilities for four-qubit phase estimation](/learning/images/courses/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring/four-qubit-probabilities.svg)
 
+
+----
+-----
+제공해주신 소스 내용 중 코드 및 수식을 제외한 부분을 한국어로 번역하고, 각 내용을 출처와 함께 제시합니다.
+
+# Hello world
+
+이 예제는 두 부분으로 구성되어 있습니다. 먼저 간단한 양자 프로그램을 생성하고 양자 처리 장치(QPU)에서 실행합니다. 실제 양자 연구에는 훨씬 더 강력한 프로그램이 필요하기 때문에, 두 번째 섹션(\[Scale to large numbers of qubits](#scale-to-large-numbers-of-qubits))에서는 간단한 프로그램을 유틸리티 수준으로 확장할 것입니다.
+
+## 시작하기 전에
+
+아직 설치하지 않았다면, \[Install and set up](/docs/guides/install-qiskit) 지침을 따르십시오. 여기에는 **IBM Cloud®를 사용하도록 설정하는** 단계도 포함됩니다.
+
+IBM Quantum® 플랫폼 문서에 있는 코드 예제는 **Jupyter** 노트북을 사용하여 개발되었습니다. 예제를 따라 하려면 Jupyter 노트북을 **로컬에서** 실행하거나 **온라인 환경**에서 실행할 수 있는 환경을 설정하는 것이 좋습니다. 권장되는 추가 시각화 지원(`'qiskit[visualization]'`)을 반드시 설치하십시오. 또한 이 예제의 두 번째 부분에서는 `matplotlib` 패키지가 필요합니다.
+
+양자 컴퓨팅에 대해 전반적으로 배우려면 IBM Quantum Learning의 **\[양자 정보 기초 과정](/learning/courses/basics-of-quantum-information)**을 방문하십시오. IBM®은 양자 컴퓨팅의 책임 있는 개발에 전념하고 있습니다. IBM의 책임 있는 양자에 대해 자세히 알아보고 **\[책임 있는 양자 컴퓨팅 및 포괄적 기술](/docs/responsible-quantum-computing)** 항목에서 책임 있는 양자 원칙을 검토하십시오.
+
+## 간단한 양자 프로그램 생성 및 실행
+
+Qiskit 패턴을 사용하여 양자 프로그램을 작성하는 네 가지 단계는 다음과 같습니다:
+
+1. **문제를 양자 고유 형식으로 매핑**합니다.
+2. **회로와 연산자를 최적화**합니다.
+3. **양자 프리미티브 함수를 사용하여 실행**합니다.
+4. **결과를 분석**합니다.
+
+### 단계 1. 문제를 양자 고유 형식으로 매핑
+
+양자 프로그램에서 **양자 회로**는 양자 명령을 나타내는 고유 형식이며, **연산자**는 측정할 관측량(observables)을 나타냅니다. 회로를 만들 때, 일반적으로 새 \[`QuantumCircuit`](/docs/api/qiskit/qiskit.circuit.QuantumCircuit#quantumcircuit-class) 객체를 생성한 다음, 순서대로 명령을 추가합니다.
+
+다음 코드 셀은 두 큐비트가 서로 완전히 얽혀 있는 상태인 **벨 상태(Bell state)**를 생성하는 회로를 만듭니다.
+
+Qiskit SDK는 $n$번째 숫자가 $1 \ll n$ 또는 $2^n$ 값을 가지는 LSb 0 비트 번호 지정을 사용합니다. 자세한 내용은 \[Bit-ordering in the Qiskit SDK](/docs/guides/bit-ordering) 항목을 참조하십시오.
+
+사용 가능한 모든 작업에 대해서는 문서의 \[`QuantumCircuit`](/docs/api/qiskit/qiskit.circuit.QuantumCircuit#quantumcircuit-class)를 참조하십시오.
+
+양자 회로를 만들 때 실행 후 **어떤 유형의 데이터를 반환**받을지 고려해야 합니다. Qiskit은 데이터를 반환하는 두 가지 방법을 제공합니다: 측정하려는 큐비트 세트에 대한 **확률 분포**를 얻거나, **관측량의 기댓값**을 얻을 수 있습니다. \[Qiskit primitives](/docs/guides/get-started-with-primitives)를 사용하여 이 두 가지 방법 중 하나로 회로를 측정하도록 워크로드를 준비하십시오 (자세한 내용은 \[Step 3](#step-3-execute-using-the-quantum-primitives)에서 설명됩니다).
+
+이 예제는 **`qiskit.quantum_info`** 서브 모듈을 사용하여 기댓값을 측정하는데, 이는 양자 상태를 변경하는 동작 또는 프로세스를 나타내는 데 사용되는 수학적 객체인 **연산자**를 사용하여 지정됩니다. 다음 코드 셀은 6개의 2큐비트 Pauli 연산자(`IZ`, `IX`, `ZI`, `XI`, `ZZ`, `XX`)를 생성합니다.
+
+여기서 `ZZ`와 같은 연산자는 텐서곱 $Z\otimes Z$의 약어입니다. 이는 큐비트 1과 큐비트 0에서 Z를 함께 측정하고 큐비트 1과 큐비트 0 사이의 **상관 관계**에 대한 정보를 얻는 것을 의미합니다. 이러한 기댓값은 일반적으로 $\langle Z_1 Z_0 \rangle$로도 표기됩니다. 상태가 얽혀 있는 경우, $\langle Z_1 Z_0 \rangle$의 측정값은 $\langle I_1 \otimes Z_0 \rangle \langle Z_1 \otimes I_0 \rangle$의 측정값과 달라야 합니다. 위에서 설명한 회로로 생성된 특정 얽힌 상태의 경우, $\langle Z_1 Z_0 \rangle$의 측정값은 1이어야 하고 $\langle I_1 \otimes Z_0 \rangle \langle Z_1 \otimes I_0 \rangle$의 측정값은 0이어야 합니다.
+
+### 단계 2. 회로 및 연산자 최적화
+
+장치에서 회로를 실행할 때, 회로에 포함된 명령어 세트를 최적화하고 **전체 깊이** (대략 명령어의 수)를 최소화하는 것이 중요합니다. 이는 오류와 노이즈의 영향을 줄여 가능한 최상의 결과를 얻도록 보장합니다. 또한, 회로의 명령어는 백엔드 장치의 **\[Instruction Set Architecture (ISA)](/docs/guides/transpile#instruction-set-architecture)**를 준수해야 하며, 장치의 기본 게이트와 큐비트 연결성을 고려해야 합니다.
+
+다음 코드는 작업을 제출할 실제 장치를 인스턴스화하고, 해당 백엔드의 ISA와 일치하도록 회로와 관측량을 변환합니다. 이 작업을 수행하려면 자격 증명(credentials)을 이미 저장했어야 합니다.
+
+### 단계 3. 양자 프리미티브를 사용한 실행
+
+양자 컴퓨터는 무작위 결과를 생성할 수 있으므로, 일반적으로 회로를 여러 번 실행하여 출력 샘플을 수집합니다. `Estimator` 클래스를 사용하여 관측량의 값을 추정할 수 있습니다. `Estimator`는 두 가지 **프리미티브** 중 하나이며; 다른 하나는 양자 컴퓨터에서 데이터를 얻는 데 사용될 수 있는 `Sampler`입니다. 이 객체들은 **프리미티브 통합 블록(PUB)**을 사용하여 회로, 관측량, 그리고 매개변수(해당하는 경우)의 선택을 실행하는 `run()` 메서드를 가지고 있습니다.
+
+작업이 제출된 후, 현재 Python 인스턴스 내에서 작업이 완료될 때까지 기다리거나, `job_id`를 사용하여 나중에 데이터를 검색할 수 있습니다 (자세한 내용은 \[섹션 on retrieving jobs](/docs/guides/monitor-job#retrieve-job-results-at-a-later-time) 참조). 작업이 완료되면 작업의 `result()` 속성을 통해 출력을 검토하십시오.
+
+이것은 전체 제출의 결과입니다. 하나의 Pub을 제출했으므로, 여기에는 하나의 내부 결과 (및 자체 메타데이터)가 포함됩니다. 이것은 6개의 관측량을 가진 단일 Pub의 결과이므로, 6개 모두에 대한 정보를 포함합니다.
+
+양자 프로그램을 실제 장치에서 실행할 때, 워크로드는 실행되기 전에 대기열에서 기다려야 합니다. 시간을 절약하기 위해, 대신 다음 코드를 사용하여 Qiskit Runtime 로컬 테스트 모드와 함께 [`fake_provider`](../api/qiskit-ibm-runtime/fake-provider)에서 이 작은 워크로드를 실행할 수 있습니다. 이는 작은 회로에 대해서만 가능하다는 점에 유의하십시오. 다음 섹션에서 규모를 확장할 때는 실제 장치를 사용해야 합니다.
+
+(시뮬레이터 코드 블록에 대한 설명:) 이것은 전체 제출의 결과입니다. 하나의 Pub을 제출했으므로, 여기에는 하나의 내부 결과 (및 자체 메타데이터)가 포함됩니다. 이것은 5개의 관측량을 가진 단일 Pub의 결과이므로, 5개 모두에 대한 정보를 포함합니다.
+
+### 단계 4. 결과 분석
+
+
+
+(플롯 분석) 큐비트 0과 1의 경우, X와 Z의 독립적인 기댓값은 모두 0인 반면, **상관 관계**(`XX` 및 `ZZ`)는 1이라는 점에 주목하십시오. 이는 **양자 얽힘(quantum entanglement)의 특징**입니다.
+
+## 2. 대규모 큐비트로 확장
+
+양자 컴퓨팅에서 **유틸리티 규모의 작업**은 이 분야의 발전에 매우 중요합니다. 이러한 작업은 100개 이상의 큐비트와 1000개 이상의 게이트를 사용할 수 있는 회로를 다루는 등 훨씬 더 큰 규모로 계산을 수행해야 합니다. 이 예제는 **100-큐비트 GHZ 상태**를 생성하고 분석하여 IBM® QPU에서 유틸리티 규모의 작업을 수행하는 방법을 보여줍니다. Qiskit 패턴 워크플로를 사용하며, 각 큐비트에 대한 기댓값 $\langle Z_0 Z_i \rangle$를 측정하는 것으로 끝납니다.
+
+### 단계 1. 문제 매핑
+
+$n$-큐비트 GHZ 상태(본질적으로 확장된 벨 상태)를 준비하는 `QuantumCircuit`를 반환하는 함수를 작성한 다음, 이 함수를 사용하여 100-큐비트 GHZ 상태를 준비하고 측정할 관측량을 수집합니다.
+
+다음으로, 관심 있는 연산자로 매핑합니다. 이 예제는 큐비트 사이의 `ZZ` 연산자를 사용하여 큐비트가 서로 멀어짐에 따라 동작이 어떻게 되는지 조사합니다. 멀리 떨어진 큐비트 간에 점점 더 부정확해지는 (손상된) 기댓값은 존재하는 노이즈 수준을 나타낼 것입니다.
+
+### 단계 2. 양자 하드웨어 실행을 위한 문제 최적화
+
+다음 코드는 백엔드의 ISA와 일치하도록 회로와 관측량을 변환합니다. 이 작업을 수행하려면 자격 증명을 이미 저장했어야 합니다.
+
+### 단계 3. 하드웨어에서 실행
+
+작업을 제출하고 **동역학적 디커플링**이라고 불리는 오류 감소 기술을 사용하여 오류 억제를 활성화하십시오. **복원력 수준(resilience level)**은 오류에 대해 구축할 복원력의 정도를 지정합니다. 수준이 높을수록 처리 시간이 길어지는 대신 더 정확한 결과를 생성합니다. 다음 코드에 설정된 옵션에 대한 자세한 설명은 \[Configure error mitigation for Qiskit Runtime](/docs/guides/configure-error-mitigation)을 참조하십시오.
+
+### 단계 4. 결과 후처리
+
+작업이 완료된 후, 결과를 플로팅하고 이상적인 시뮬레이션에서는 모든 $\langle Z_0 Z_i \rangle$가 1이어야 함에도 불구하고, **$i$가 증가함에 따라 $\langle Z_0 Z_i \rangle$가 감소**한다는 점에 주목하십시오.
+
+이전 플롯은 큐비트 간 거리가 증가함에 따라 **노이즈 존재로 인해 신호가 감쇠**한다는 것을 보여줍니다.
+
+## 다음 단계
+
+- **회로를 구축하는 방법**에 대해 더 자세히 알아보십시오.
+- **VQE를 사용한 하이젠베르크 체인의 바닥 상태 에너지 추정** 튜토리얼을 시도해 보십시오.
+
+
+제시된 파일 내용을 한국어로 번역했습니다. 요청하신 대로 소스 코드, 수식, 코드 내 주석은 번역에서 제외하였습니다.
+
+***
+
+# CHSH 부등식
+
+*사용량 추정치: Heron r2 프로세서에서 2분 (참고: 이는 추정치일 뿐입니다. 실제 실행 시간은 다를 수 있습니다.)*
+
+## 배경
+
+이 튜토리얼에서는 **Estimator 기본 연산(primitive)을 사용하여 CHSH 부등식 위반을 입증하는 실험을 양자 컴퓨터에서 실행**할 것입니다.
+
+Clauser, Horne, Shimony, Holt의 이름을 따서 명명된 CHSH 부등식은 **벨의 정리(Bell's theorem, 1969)를 실험적으로 입증**하는 데 사용됩니다. 이 정리는 국소 은닉 변수 이론(local hidden variable theories)이 양자 역학의 얽힘(entanglement)의 일부 결과를 설명할 수 없다고 주장합니다.
+
+**CHSH 부등식의 위반은 양자 역학이 국소 은닉 변수 이론과 양립할 수 없음**을 보여주는 데 사용됩니다. 이는 양자 역학의 기초를 이해하는 데 중요한 실험입니다.
+
+2022년 노벨 물리학상은 Alain Aspect, John Clauser 및 Anton Zeilinger에게 양자 정보 과학에서의 선구적인 작업, 특히 **벨 부등식 위반을 입증하는 얽힌 광자(entangled photons)를 사용한 실험**으로 인해 부분적으로 수여되었습니다.
+
+## 요구 사항
+
+이 튜토리얼을 시작하기 전에 다음 사항이 설치되어 있는지 확인하십시오:
+
+*   Qiskit SDK 1.0 이상
+*   Qiskit Runtime (`pip install qiskit-ibm-runtime`) 0.22 이상
+*   시각화 지원 (`'qiskit[visualization]'`)
+
+## 설정
+
+## 단계 1: 고전적 입력을 양자 문제에 매핑
+
+이 실험을 위해 우리는 **얽힌 쌍(entangled pair)을 생성**하고, 각 큐비트를 두 가지 다른 기저에서 측정할 것입니다. 첫 번째 큐비트의 기저를 $A$와 $a$로, 두 번째 큐비트의 기저를 $B$와 $b$로 명명할 것입니다. 이를 통해 CHSH 값 $S_1$을 계산할 수 있습니다.
+
+각 관측 가능량(observable)은 $+1$ 또는 $-1$입니다. 분명히 항 $B\pm b$ 중 하나는 $0$이어야 하고, 다른 하나는 $\pm 2$이어야 합니다. 따라서 $S_1 = \pm 2$입니다. $S_1$의 평균값은 부등식을 만족해야 합니다.
+
+$S_1$을 $A, a, B, b$ 항으로 전개합니다.
+
+또 다른 CHSH 값 $S_2$를 정의할 수 있습니다. 이는 또 다른 부등식으로 이어집니다.
+
+양자 역학이 국소 은닉 변수 이론으로 설명될 수 있다면, 앞서 언급된 부등식들은 반드시 참이어야 합니다. 하지만 이 튜토리얼에서 입증되듯이, 이 부등식들은 **양자 컴퓨터에서 위반될 수** 있습니다. 그러므로 양자 역학은 국소 은닉 변수 이론과 양립할 수 없습니다.
+
+더 많은 이론을 배우고 싶다면, John Watrous와 함께 **[Entanglement in Action](/learning/courses/basics-of-quantum-information/entanglement-in-action/chsh-game)**을 살펴보십시오.
+
+양자 컴퓨터에서 벨 상태 $|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}$를 생성함으로써 두 큐비트 사이에 얽힌 쌍을 생성할 것입니다. Estimator 기본 연산을 사용하여, 두 CHSH 값 $\langle S_1\rangle$과 $\langle S_2\rangle$의 기댓값을 계산하는 데 필요한 기댓값들($\langle AB \rangle, \langle Ab \rangle, \langle aB \rangle$, 그리고 $\langle ab \rangle$)을 직접 얻을 수 있습니다. Estimator 기본 연산이 도입되기 전에는 측정 결과(measurement outcomes)로부터 기댓값을 구성해야 했습니다.
+
+두 번째 큐비트는 $Z$ 기저와 $X$ 기저에서 측정할 것입니다. 첫 번째 큐비트도 직교 기저(orthogonal bases)에서 측정되지만, 두 번째 큐비트에 대한 각도를 $0$에서 $2\pi$ 사이로 스위프(sweep)할 것입니다. 보시다시피, Estimator 기본 연산은 매개변수화된 회로(parameterized circuits)를 실행하는 것을 매우 쉽게 만듭니다. 일련의 CHSH 회로를 만드는 대신, 측정 각도를 지정하는 매개변수를 가진 **하나의 CHSH 회로**와 해당 매개변수에 대한 일련의 위상 값만 만들면 됩니다.
+
+마지막으로, 결과를 분석하고 이를 측정 각도에 대해 플롯할 것입니다. 특정 측정 각도 범위에 대해 CHSH 값의 기댓값 $|\langle S_1\rangle| > 2$ 또는 $|\langle S_2\rangle| > 2$인 것을 보게 될 것이며, 이는 **CHSH 부등식의 위반을 입증**합니다.
+
+> 'ibm\_kingston'
+
+### 매개변수화된 CHSH 회로 생성
+
+먼저, 매개변수 $\theta$를 사용하여 회로를 작성하며, 이를 'theta'라고 부릅니다. [`Estimator` 기본 연산](https://docs.quantum-computing.ibm.com/api/qiskit-ibm-runtime/qiskit_ibm_runtime.EstimatorV2)은 **관측 가능량의 기댓값을 직접 제공**하여 회로 구축 및 출력 분석을 엄청나게 단순화할 수 있습니다. 특히 잡음이 있는 시스템에서의 근시일(near-term) 응용 분야에서 관심 있는 많은 문제들은 기댓값의 관점에서 공식화될 수 있습니다. `Estimator` (V2) 기본 연산은 제공된 관측 가능량에 기반하여 측정 기저를 자동으로 변경할 수 있습니다.
+
+### 나중에 할당할 위상 값 목록 생성
+
+매개변수화된 CHSH 회로를 생성한 후, 다음 단계에서 회로에 할당될 위상 값 목록을 생성할 것입니다. 다음 코드를 사용하여 $0$부터 $2\pi$까지 동일한 간격으로 배열된 21개의 위상 값, 즉 $0, 0.1\pi, 0.2\pi, \dots, 1.9\pi, 2\pi$ 목록을 생성할 수 있습니다.
+
+### 관측 가능량
+
+이제 기댓값을 계산할 관측 가능량이 필요합니다. 이 경우, 우리는 각 큐비트에 대한 직교 기저를 보고 있으며, 첫 번째 큐비트에 대한 매개변수화된 $Y$ 회전을 통해 두 번째 큐비트 기저에 대해 측정 기저를 거의 연속적으로 스위프하도록 합니다. 따라서 우리는 관측 가능량 $ZZ, ZX, XZ, XX$를 선택할 것입니다.
+
+## 단계 2: 양자 하드웨어 실행을 위한 문제 최적화
+
+전체 작업 실행 시간을 줄이기 위해, V2 기본 연산은 대상 시스템이 지원하는 명령어 및 연결성(instruction set architecture, ISA 회로 및 관측 가능량이라고 함)을 준수하는 회로와 관측 가능량만 허용합니다.
+
+### ISA 회로
+
+### ISA 관측 가능량
+
+마찬가지로, [`Runtime Estimator V2`](/docs/api/qiskit-ibm-runtime/estimator-v2#run)로 작업을 실행하기 전에 관측 가능량을 백엔드 호환 가능하도록 변환해야 합니다. 이 변환은 `SparsePauliOp` 객체의 `apply_layout` 메서드를 사용하여 수행할 수 있습니다.
+
+## 단계 3: Qiskit 기본 연산을 사용한 실행
+
+전체 실험을 [`Estimator`](https://docs.quantum-computing.ibm.com/api/qiskit-ibm-runtime/qiskit_ibm_runtime.EstimatorV2)에 대한 한 번의 호출로 실행하기 위해, 기댓값을 계산하기 위해 **[Qiskit Runtime `Estimator`](/docs/api/qiskit-ibm-runtime/estimator-v2) 기본 연산을 생성**할 수 있습니다. `EstimatorV2.run()` 메서드는 '기본 통합 블록(primitive unified blocs, PUBs)'의 반복 가능 객체를 받습니다. 각 PUB는 `(회로, 관측 가능량, 매개변수 값: 선택 사항, 정밀도: 선택 사항)` 형식의 반복 가능 객체입니다.
+
+## 단계 4: 후처리 및 원하는 고전적 형식으로 결과 반환
+
+Estimator는 두 관측 가능량 $\langle ZZ \rangle - \langle ZX \rangle + \langle XZ \rangle + \langle XX \rangle$ 와 $\langle ZZ \rangle + \langle ZX \rangle - \langle XZ \rangle + \langle XX \rangle$ 모두에 대한 기댓값을 반환합니다.
+
+그림에서 선과 회색 영역은 경계를 나타냅니다. 가장 바깥쪽의 (대시-점선) 선은 양자 경계($\pm 2$)를 나타내는 반면, 안쪽의 (점선) 선은 고전적 경계($\pm 2\sqrt{2}$)를 나타냅니다. **[참고: 소스의 텍스트에서는 양자 경계를 $\pm 2$, 고전적 경계를 $\pm 2\sqrt{2}$로 명시하고 있는데, 이는 일반적인 CHSH 이론과 그림의 코드 상의 값 ($\pm 2$가 고전적, $\pm 2\sqrt{2}$가 양자 경계)과 상충됩니다. 번역은 소스 원문 텍스트를 따랐습니다.]**
+
+CHSH 증인(witness) 값이 고전적 경계를 초과하는 영역이 있음을 볼 수 있습니다. 축하합니다! 실제 양자 시스템에서 CHSH 부등식의 위반을 성공적으로 입증했습니다!

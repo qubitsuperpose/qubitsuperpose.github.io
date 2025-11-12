@@ -1,5 +1,5 @@
 ---
-title: 6차시 3:Quantum Query Algorithms(The Deutsch-Jozsa algorithm)
+title: 6차시 3:Fundamentals of quantum algorithms(The Deutsch-Jozsa algorithm)
 layout: single
 classes: wide
 categories:

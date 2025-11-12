@@ -1,5 +1,5 @@
 ---
-title: 1차시 1:Quantum Information
+title: 3차시 1:Understanding Quantum Information
 layout: single
 classes: wide
 categories:

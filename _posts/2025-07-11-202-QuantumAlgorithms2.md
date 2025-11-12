@@ -1,5 +1,5 @@
 ---
-title: 6차시 2:Quantum Query Algorithms(Deutsch's algorithm)
+title: 6차시 2:Fundamentals of quantum algorithms(Deutsch's algorithm)
 layout: single
 classes: wide
 categories:

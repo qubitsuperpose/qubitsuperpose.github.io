@@ -1,5 +1,5 @@
 ---
-title: 6차시 4:Quantum Query Algorithms(Simon's algorithm)
+title: 6차시 4:Fundamentals of quantum algorithms(Simon's algorithm)
 layout: single
 classes: wide
 categories:

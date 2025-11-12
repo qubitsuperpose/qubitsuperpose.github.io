@@ -1,5 +1,5 @@
 ---
-title: 2차시 2:Linear Algebra(Dave)
+title: 1차시 2:Linear Algebra(Dave2)
 layout: single
 classes: wide
 categories:
@@ -27,19 +27,19 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 
 몇 가지 방법으로 벡터들이 선형 독립인지 선형 종속인지 확인할 수 있습니다.
 
-1. 스칼라 방정식 풀기: 가장 기본!
+1. 스칼라 방정식 풀기: 가장 기본 \
 주어진 벡터들 ($V_1, V_2, ..., V_n$)에 각각 숫자들($C_1, C_2, ..., C_n$)을 곱해서 모두 더했을 때 0이 되는 방정식을 세웁니다.
 $$C_1V_1 + C_2V_2 + ... + C_nV_n = 0$$
 * **선형 독립:** 이 방정식을 만족하는 숫자들이 **모두 0일 때만** 가능하다면, 이 벡터들은 **선형 독립**입니다. 즉, 어떤 벡터도 다른 벡터들의 조합으로 0을 만들 수 없다는 뜻이죠.
 * **선형 종속:** 만약 숫자들 중에 **0이 아닌 것이 하나라도 있는데도** 이 방정식이 성립한다면, 이 벡터들은 **선형 종속**입니다. 0이 아닌 숫자가 있다는 건 그 벡터를 다른 벡터들로 표현할 수 있다는 의미.
 
-2. 연립방정식으로 생각하고 풀기
+2. 연립방정식으로 생각하고 풀기 \
 위의 스칼라 방정식을 푸는 것은 사실 미지수(숫자 $C_1$부터 $C_n$)가 있는 연립방정식을 푸는 것과 같습니다.
 * **간단한 경우:** 대입하거나 소거하는 방법으로 풀 수 있습니다.
 * **복잡한 경우:** 벡터들을 숫자로 나열해서 **행렬**이라는 것을 만들고, 이 행렬을 간단하게 만드는 "**행 소거(Row Reduction)**"라는 작업을 통해 답을 찾습니다.
     * **자유 변수(Free Variable)의 등장:** 만약 연립방정식을 풀었을 때, 어떤 미지수($C_i$)가 특정 값으로 정해지지 않고 아무 값이나 가질 수 있게 된다면(이것을 **자유 변수**라고 합니다), 그 벡터들은 **선형 종속**입니다. '자유롭다'는 것은 곧 그 벡터가 다른 벡터들의 조합으로 표현될 수 있다는 의미이기 때문이죠. 모든 $C_i$가 오직 0으로만 결정되어야 선형 독립입니다.
 
-3. 행렬식(Determinant) 이용하기: 특별한 경우에만!
+3. 행렬식(Determinant) 이용하기: 특별한 경우에만 \
 이 방법은 **정방 행렬(가로줄과 세로줄의 개수가 같은 행렬)**일 때만 사용할 수 있습니다.
 * 벡터들로 행렬을 만들었을 때, 그 **행렬식이 0이면** 벡터들은 **선형 종속**입니다.
 * **행렬식이 0이 아니면** 벡터들은 **선형 독립**입니다.
@@ -380,7 +380,7 @@ $L(\mathbf{V})$ = $$\begin{bmatrix} V_2 \\ V_1 + V_2 \\ V_1 - V_2 \end{bmatrix}$
 ### 17.4 정사각 행렬의 직교성: 열이 정규직교인 행렬
 - **정의**: 정사각 행렬(예: 2x2 또는 3x3)의 **열 벡터들이 정규직교**라면 그 행렬은 **직교 행렬**입니다.
 - **예시**: 행렬 $$\mathbf{M} = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{bmatrix}$$
-  - 열 벡터: $$\mathbf{v}_1 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{bmatrix}$, $\mathbf{v}_2 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \end{bmatrix}$$
+  - 열 벡터: $$\mathbf{v}_1 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{bmatrix}, \mathbf{v}_2 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \end{bmatrix}$$
   - **직교성 확인**:
     \[
     \mathbf{v}_1 \cdot \mathbf{v}_2 = \left( \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}} \right) + \left( \frac{1}{\sqrt{2}} \cdot -\frac{1}{\sqrt{2}} \right) = \frac{1}{2} - \frac{1}{2} = 0
@@ -395,7 +395,7 @@ $L(\mathbf{V})$ = $$\begin{bmatrix} V_2 \\ V_1 + V_2 \\ V_1 - V_2 \end{bmatrix}$
     \]
     → 길이가 1이므로 정규직교입니다.
 - **직교 행렬의 장점**: 직교 행렬의 역행렬은 단순히 **전치 행렬**(행과 열을 바꾼 행렬)입니다.
-  - 예: $$\mathbf{M}$의 전치 행렬은 $\mathbf{M}^T = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{bmatrix}$$
+  - 예: $$\mathbf{M}의 전치 행렬은 \mathbf{M}^T = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{bmatrix}$$
   - $\mathbf{M}^T$가 $\mathbf{M}^{-1}$과 같음을 확인하려면 $\mathbf{M} \cdot \mathbf{M}^T = \mathbf{I}$ (단위 행렬)임을 확인하면 됩니다:
     $$
     \mathbf{M} \cdot \mathbf{M}^T = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{bmatrix} \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{bmatrix}
@@ -462,7 +462,7 @@ $L(\mathbf{V})$ = $$\begin{bmatrix} V_2 \\ V_1 + V_2 \\ V_1 - V_2 \end{bmatrix}$
   \]
 - 일반적으로, $k$번째 벡터는:
   $$
-  \mathbf{u}_k = \mathbf{v}_k - \sum_{i=1}^{k-1} \frac{\mathbf{v}_k \cdot \mathbf{u}_i}{\mathbf{u}_i \cdot \mathbf{u}_i} \mathbf{u}_i
+  \mathbf{u}_k = \mathbf{v}_k - \sum\limits_{i=1}^{k-1} \frac{\mathbf{v}_k \cdot \mathbf{u}_i}{\mathbf{u}_i \cdot \mathbf{u}_i} \mathbf{u}_i
   $$
 
 ### 18.3 **예시: 3차원 공간에서 직교 기저 만들기**
@@ -806,7 +806,7 @@ $$
   5 & 5
   \end{bmatrix}
   $$
-- 결과: 원래 행렬 A $[-3, -4; 5, 6]$가 나옵니다.
+- 결과: 원래 행렬 A = $$\begin{bmatrix}-3 & -4 \\ 5 & 6 \end{bmatrix}$$가 나옵니다.
 
 ### 20.5 대각화의 장점
 - 행렬 계산이 **단순화**됩니다.
@@ -821,7 +821,6 @@ $$
 ## 21. 복소수 행렬이란?
 - 출처: [Complex, Hermitian, and Unitary Matrices](https://www.youtube.com/watch?v=DUuTx2nbizM&list=PLybg94GvOJ9En46TNCXL2n6SiqRc_iMB8&index=21)
 
-복소수 행렬(Complex Matrices)에 대한 개념을 입문자도 쉽게 이해할 수 있도록 간단히 정리했습니다. 행렬 표기는 완성형 한글로 작성하며, 복잡한 수학적 표현은 최대한 직관적으로 설명합니다.
 
 ### 21.1 복소수 행렬이란?
 - **복소수 행렬**은 행렬의 원소가 **복소수**로 이루어진 행렬입니다.
@@ -894,6 +893,30 @@ $$ \begin{bmatrix} 2-3i & -i & 6+4i \\ 7 & 2+3i & i \end{bmatrix} $$
     2. $ Ux = C $를 풀어 $ x $를 구함.  
   - 삼각행렬은 계산이 쉬워 효율적입니다.
 
+LU분해 예제:
+* **문제**: Ax = B를 풀기
+
+$A =$ $$\begin{bmatrix} 2 & 4 \\ 1 & 3 \end{bmatrix}, \quad B = \begin{bmatrix} 10 \\ 7 \end{bmatrix}$$
+
+* **LU 분해**:
+$A = LU =$ $$\begin{bmatrix} 1 & 0 \\ 0.5 & 1 \end{bmatrix} \begin{bmatrix} 2 & 4 \\ 0 & 1 \end{bmatrix}$$
+
+* **1단계**: Ly = B 풀기
+$$\begin{bmatrix} 1 & 0 \\ 0.5 & 1 \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} = \begin{bmatrix} 10 \\ 7 \end{bmatrix}$$
+
+  - 첫 번째 식: $y_1 = 10$
+  - 두 번째 식: $0.5(10) + y_2 = 7$ → $y_2 = 2$
+
+따라서 $y =$ $$\begin{bmatrix} 10 \\ 2 \end{bmatrix}$$
+
+* **2단계**: Ux = y 풀기
+$$\begin{bmatrix} 2 & 4 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 10 \\ 2 \end{bmatrix}$$
+
+  - 두 번째 식: $x_2 = 2$
+  - 첫 번째 식: $2x_1 + 4(2) = 10$ → $x_1 = 1$
+
+**답**: $x =$ $$\begin{bmatrix} 1 \\ 2 \end{bmatrix}$$
+
 
 ### 22.2 **콜레스키 분해 (Cholesky Decomposition)**  
 **쉽게 말해**: LU 분해의 특수한 경우로, 대칭 행렬에 적용됩니다.  
@@ -912,6 +935,35 @@ $$ \begin{bmatrix} 2-3i & -i & 6+4i \\ 7 & 2+3i & i \end{bmatrix} $$
 - **활용 예시**:  
   - 행렬의 “제곱근”처럼 사용됩니다.  
   - 통계나 최적화 문제에서 계산 효율성을 높이는 데 유용합니다.
+
+
+간단한 2x2 예제를 보여드리겠습니다.
+
+**문제**: 대칭 양정부호 행렬 A를 콜레스키 분해
+
+$A =$  $$\begin{bmatrix} 4 & 2 \\ 2 & 5 \end{bmatrix}$$
+
+**콜레스키 분해**: $A = LL^T$ (L은 하삼각행렬)
+
+$L =$ $$\begin{bmatrix} l_{11} & 0 \\ l_{21} & l_{22} \end{bmatrix}$$
+
+**계산 과정**:
+
+$LL^T =$ $$\begin{bmatrix} l_{11} & 0 \\ l_{21} & l_{22} \end{bmatrix} \begin{bmatrix} l_{11} & l_{21} \\ 0 & l_{22} \end{bmatrix} = \begin{bmatrix} l_{11}^2 & l_{11}l_{21} \\ l_{11}l_{21} & l_{21}^2 + l_{22}^2 \end{bmatrix}$$
+
+A와 비교하면:
+
+1. $l_{11}^2 = 4$ → $l_{11} = 2$
+2. $l_{11}l_{21} = 2$ → $2 \cdot l_{21} = 2$ → $l_{21} = 1$
+3. $l_{21}^2 + l_{22}^2 = 5$ → $1 + l_{22}^2 = 5$ → $l_{22} = 2$
+
+**결과**:
+$L =$ $$\begin{bmatrix} 2 & 0 \\ 1 & 2 \end{bmatrix}$$
+
+**검증**:
+$LL^T =$ $$\begin{bmatrix} 2 & 0 \\ 1 & 2 \end{bmatrix} \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix} = \begin{bmatrix} 4 & 2 \\ 2 & 5 \end{bmatrix} = A$$
+
+**특징**: LU분해와 달리 **하나의 삼각행렬**만 구하면 되고, **대칭 행렬**에만 사용 가능합니다!
 
 ### 22.3 **QR 분해 (QR Decomposition)**  
 **쉽게 말해**: 행렬 $ A $를 정규 직교 행렬 $ Q $와 상삼각행렬 $ R $로 나누는 방법입니다.  
@@ -943,6 +995,29 @@ $$ \begin{bmatrix} 2-3i & -i & 6+4i \\ 7 & 2+3i & i \end{bmatrix} $$
   - $ Q $의 역행렬이 전치 행렬이므로 계산이 간단:  
     $ Ax = B \rightarrow Rx = Q^T B $.
 
+**간단한 2x2 예제**:
+
+$A =$ $$\begin{bmatrix} 3 & 1 \\ 4 & 2 \end{bmatrix}$$
+
+**그람-슈미트 과정으로 Q, R 구하기**:
+
+**1단계**: 첫 번째 열 정규화
+- $\mathbf{a}_1 =$ $$\begin{bmatrix} 3 \\ 4 \end{bmatrix}$$, 크기 = $\sqrt{9+16} = 5$
+- $\mathbf{q}_1 = $ $$\frac{1}{5}\begin{bmatrix} 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 0.6 \\ 0.8 \end{bmatrix}$$
+
+**2단계**: 두 번째 열을 첫 번째에 직교하도록 만들기
+- $\mathbf{a}_2 =$  $$\begin{bmatrix} 1 \\ 2 \end{bmatrix}$$
+- 투영: $\mathbf{a}_2 \cdot \mathbf{q}_1 = 0.6(1) + 0.8(2) = 2.2$
+- 직교 성분: $\mathbf{v}_2 = \mathbf{a}_2 - 2.2\mathbf{q}_1 $= $$\begin{bmatrix} 1 \\ 2 \end{bmatrix} - \begin{bmatrix} 1.32 \\ 1.76 \end{bmatrix} = \begin{bmatrix} -0.32 \\ 0.24 \end{bmatrix}$$
+- 크기 = $\sqrt{0.32^2 + 0.24^2} = 0.4$
+- $\mathbf{q}_2 =$ $$\begin{bmatrix} -0.8 \\ 0.6 \end{bmatrix}$$
+
+**결과**:
+$Q =$ $$\begin{bmatrix} 0.6 & -0.8 \\ 0.8 & 0.6 \end{bmatrix}, \quad R = \begin{bmatrix} 5 & 2.2 \\ 0 & 0.4 \end{bmatrix}$$
+
+**검증**:
+$QR =$ $$\begin{bmatrix} 0.6 & -0.8 \\ 0.8 & 0.6 \end{bmatrix} \begin{bmatrix} 5 & 2.2 \\ 0 & 0.4 \end{bmatrix} = \begin{bmatrix} 3 & 1 \\ 4 & 2 \end{bmatrix} = A$$ 
+
 
 ### 22.4 **특이값 분해 (SVD, Singular Value Decomposition)**  
 **쉽게 말해**: 모든 행렬에 적용 가능한 강력한 분해 방법으로, 대각화를 일반화한 것.  
@@ -972,7 +1047,30 @@ $$ \begin{bmatrix} 2-3i & -i & 6+4i \\ 7 & 2+3i & i \end{bmatrix} $$
   - 행렬의 구조(열 공간, 행 공간, 영공간 등)를 분석.  
   - 데이터 압축, 이미지 처리, 머신러닝(예: 주성분 분석)에서 사용.  
   - $ \Sigma $의 특이값은 행렬의 중요 정보를 나타냄.
+  - 어떤 행렬이든 SVD 가능! (정사각행렬이 아니어도 OK)
 
+**간단한 2x2 예제**:
+
+$A =$ $$\begin{bmatrix} 3 & 0 \\ 4 & 5 \end{bmatrix}$$
+
+**1단계**: $A^T A$ 계산 ($Q_2$를 구하기 위해)
+$A^T A =$ $$\begin{bmatrix} 3 & 4 \\ 0 & 5 \end{bmatrix} \begin{bmatrix} 3 & 0 \\ 4 & 5 \end{bmatrix} = \begin{bmatrix} 25 & 20 \\ 20 & 25 \end{bmatrix}$$
+
+고유값: λ₁ = 45, λ₂ = 5
+
+고유벡터 정규화:
+$Q_2 =$ $$\begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ 1/\sqrt{2} & -1/\sqrt{2} \end{bmatrix}$$
+
+**2단계**: 특이값 구하기
+$\sigma_1 = \sqrt{45} = 3\sqrt{5} \approx 6.71, \quad \sigma_2 = \sqrt{5} \approx 2.24$
+
+$\Sigma = $ $$\begin{bmatrix} 6.71 & 0 \\ 0 & 2.24 \end{bmatrix}$$
+
+**3단계**: $Q_1$ 구하기 ($Q_1 = AQ_2 Σ^{-1}$)
+$Q_1 = $ $$\begin{bmatrix} 0.45 & -0.89 \\ 0.89 & 0.45 \end{bmatrix}$$
+
+**결과**:
+$A =$ $$\begin{bmatrix} 0.45 & -0.89 \\ 0.89 & 0.45 \end{bmatrix} \begin{bmatrix} 6.71 & 0 \\ 0 & 2.24 \end{bmatrix} \begin{bmatrix} 0.71 & 0.71 \\ 0.71 & -0.71 \end{bmatrix}$$
 
 ### 22.5 요약표
 

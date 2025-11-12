@@ -1,5 +1,5 @@
 ---
-title: 6차시 6:Quantum algorithmic foundations (Measuring computational cost)
+title: 6차시 6:Fundamentals of quantum algorithms (Measuring computational cost)
 layout: single
 classes: wide
 categories:

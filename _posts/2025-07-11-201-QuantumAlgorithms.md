@@ -1,5 +1,5 @@
 ---
-title: 6차시 1:Quantum Query Algorithms(The query model of computation)
+title: 6차시 1:Fundamentals of quantum algorithms(The query model of computation)
 layout: single
 classes: wide
 categories:
