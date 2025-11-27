@@ -227,10 +227,8 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
   \]$
 >
 >- **완전 감쇠(Amplitude Damping)**:
-  $\[
-  K_0 = \begin{bmatrix} 1 & 0 \\ 0 & \sqrt{1 - \gamma} \end{bmatrix},\quad
-  K_1 = \begin{bmatrix} 0 & \sqrt{\gamma} \\ 0 & 0 \end{bmatrix}
-  \]$
+  $K_0 =$ $$\begin{bmatrix} 1 & 0 \\ 0 & \sqrt{1 - \gamma} \end{bmatrix},\quad$$
+  $K_1 =$ $$\begin{bmatrix} 0 & \sqrt{\gamma} \\ 0 & 0 \end{bmatrix}$$
 >
 >**장점:**
 >

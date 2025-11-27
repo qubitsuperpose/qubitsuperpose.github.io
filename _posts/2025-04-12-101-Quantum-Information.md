@@ -107,22 +107,23 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 
 ### 1.5 **디랙 표기법 (Dirac Notation) 추가 설명**
 
-*   **\|a⟩ (Ket a)**: 
-    - 고전 상태 a를 나타내는 표준 기저 벡터. 
-    - 예: 비트 0은 \|0⟩ = $$\begin{bmatrix}1 \\ 0\end{bmatrix}$$, 비트 1은 \|1⟩ = $$\begin{bmatrix}0 \\ 1\end{bmatrix}$$.
-*   **⟨a\| (Bra a)**: 
-    - \|a⟩의 켤레 전치 행 벡터. 예: ⟨0\| = $\[1, 0\]$. 
-    - 고전 상태에서는 복소수가 없으므로 전치만 고려.
-*   **⟨a\|b⟩**: 
-    - Bra와 Ket의 내적. a = b이면 1, a ≠ b이면 0. 
-    - 이는 상태의 직교성을 나타냄(예: ⟨0\|1⟩ = 0).
-*   **\|a⟩⟨b\|**: 
-    - 외적 행렬. 예: \|0⟩⟨1\|은 $$\begin{bmatrix}1 \\ 0\end{bmatrix} \cdot \begin{bmatrix}0 & 1 \end{bmatrix} =  \begin{bmatrix}0& 1 \\ 0 & 0\end{bmatrix}$$. 
-    - 이는 상태 전이를 표현하는 데 사용.
-        - ∣0⟩⟨1∣⋅∣1⟩=∣0⟩(⟨1∣1⟩)=∣0⟩⋅1=∣0⟩
-*   **부연설명**: 
-    - 디랙 표기법은 양자역학의 언어로, 상태와 연산을 간결히 표현하며, 
-    - 특히 양자 상태의 중첩과 얽힘을 다룰 때 유용.
+* **$\|a\rangle$ (Ket a)**:
+    * **양자 상태**를 나타내는 열 벡터입니다. 특히 $\|0\rangle$나 $\|1\rangle$와 같은 **고전 상태를 인코딩하는 기저 벡터**로 주로 사용됩니다.
+    * 예: 비트 0은 $\|0\rangle$ = $$\begin{pmatrix}1 \\ 0\end{pmatrix}$$, 비트 1은 $\|1\rangle$ = $$\begin{pmatrix}0 \\ 1\end{pmatrix}$$.
+* **$\langle a\|$ (Bra a)**:
+    * $\|a\rangle$의 **켤레 전치(Hermitian Conjugate)**인 행 벡터입니다. $(\langle a\| = (\|a\rangle)^\dagger)$.
+    * 예: $\langle 0\| =$ $$\begin{pmatrix}1 & 0\end{pmatrix}$$.
+    * **부연설명:** 복소 성분이 있는 일반적인 양자 상태에서는 **전치**뿐만 아니라 **켤레 복소수**도 취해야 합니다 
+    (예: $\langle \psi\| = (\alpha^* , \beta^*)$).
+* **$\langle a\|b\rangle$**:
+    * Bra와 Ket의 **내적**이며, 두 상태의 **중첩** 정도를 나타내는 **스칼라(복소수)** 값입니다.
+    * $\mathbf{\|a\rangle}$와 $\mathbf{\|b\rangle}$가 **정규 직교 기저**일 때, $a = b$이면 1, $a \neq b$이면 0입니다. (직교성)
+* **$\|a\rangle\langle b\|$**:
+    * **외적**이며, 상태 $\|b\rangle$를 $\|a\rangle$로 변환하는 **선형 연산자(행렬)**를 나타냅니다.
+    * 예: $\|0\rangle\langle 1\|$은 $$\begin{pmatrix}0& 1 \\ 0 & 0\end{pmatrix}$$입니다.
+    * 사용 예: $\|0\rangle\langle 1\| \cdot \|1\rangle = \|0\rangle (\langle 1\|1\rangle) = \|0\rangle \cdot 1 = \|0\rangle$
+* **부연설명**:
+    * 디랙 표기법은 양자역학의 언어로, 상태와 연산을 간결히 표현하며, 특히 양자 상태의 **중첩**과 **얽힘**을 다룰 때 유용합니다.
 
 ### 1.6 **측정 (Measurement) - 고전 정보**
 
@@ -267,7 +268,7 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 * Bra $\langle a\|$: 
   - 고전적 상태 $a$에 해당하는 위치에 '1'이 있고, 다른 곳은 '0'인 행 벡터.
 * 내적 $\langle a\|b\rangle$: 
-  - $a=b$이면 1, $a \neq b$이면 0.
+  - $a=b$이면 1, $a \neq b$이면 0.(정규 직교 기저일 때)
 * 외적 $\|a\rangle\langle b\|$: 
   - $(a, b)$ 위치에 '1'이 있고, 다른 곳은 '0'인 행렬.
 * 임의의 벡터 $\|\psi\rangle$에 대해, bra $\langle\psi\|$는 그의 켤레 전치 ($\|\psi\rangle^\dagger$)임.

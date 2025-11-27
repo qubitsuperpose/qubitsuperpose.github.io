@@ -885,3 +885,63 @@ Estimator는 두 관측 가능량 $\langle ZZ \rangle - \langle ZX \rangle + \la
 
 CHSH 증인(witness) 값이 고전적 경계를 초과하는 영역이 있음을 볼 수 있습니다. 축하합니다! 실제 양자 시스템에서 CHSH 부등식의 위반을 성공적으로 입증했습니다!
 
+SWAP 게이트는 두 개의 큐비트 상태를 **서로 교환**하는 역할을 하는 2큐비트 양자 게이트입니다.
+
+---
+주어진 질문과 답을 검토해 보겠습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+qunatumsoar.com
+1.01 The Qubit and Superposition
+1.02 Bloch Sphere and Single Qubit Gates
+1.03 Introduction to Phase
+1.04 he Hadamard, S and T Gates
+
+2.01 Mathematical Representation
+2.02 Quantum Circuits and Multi-qubit Gates
+2.03 Measuring Singular Qubits
+2.04 Quantum Entanglement
+2.05 Phase Kickback
+
+3.01 Superdense Coding
+3.02 Classical Operations Prerequisites
+3.03 Functions on Quantum Computers
+3.04 Deutsch's Algorithm
+3.05 Common Identities
+3.06 Deutsch-Jozsa Algorithm
+3.07 Bernstein-Vazarai Algorithm
+3.08 Quantum Fourier Transform (QFT)
+3.09 Quantum Phase Estimation
+3.10 Shor's Algorithm
+
+Qiskit 유튜브 채널에서 
+1. Lesson 01: 단일 시스템 - 양자 정보 및 연산
+2. Lesson 02: 다중 시스템 - 양자 정보 및 계산 이해
+3. Lesson 03: 양자 회로, 내적, 양자 정보의 한계
+4. Lesson 04: 얽힘, 양자 텔레포테이션- 양자 정보 및 연산
+5. Lesson 05: 양자 알고리즘 - 쿼리 모델
+6. Lesson 06: 양자 알고리즘 기초
+7. Lesson 07: 위상 추정 및 Shor 알고리즘
+8. Lesson 08: Grover’s Algorithm
+9. Lesson 09: 밀도행렬
+10. Lesson 10: 채널
+11. Lesson 11: 측정
+12. Lesson 12: 양자 상태 정화 및 충실도
+13. Lesson 13: 양자 오류 수정
+14. Lesson 14: 안정화 형식
+15. Lesson 15: 고급 양자 오류 수정 코드
+16. Lesson 16: 오류 허용(Fault Tolerant) 양자 컴퓨팅 심층 분석
