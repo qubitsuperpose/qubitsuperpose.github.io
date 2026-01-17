@@ -62,8 +62,8 @@ $$
 
 하지만 우리는 이 연산을 표준 기저 상태에 대한 동작으로도 표현할 수 있습니다:
 \[
-H \vert 0\rangle  = \frac{1}{\sqrt{2}} \vert 0 \rangle + \frac{1}{\sqrt{2}} \vert 1 \rangle
-H \vert 1\rangle  = \frac{1}{\sqrt{2}} \vert 0 \rangle - \frac{1}{\sqrt{2}} \vert 1 \rangle.
+H \vert 0\rangle  = \frac{1}{\sqrt{2}} \vert 0 \rangle + \frac{1}{\sqrt{2}} \vert 1 \rangle\]
+\[H \vert 1\rangle  = \frac{1}{\sqrt{2}} \vert 0 \rangle - \frac{1}{\sqrt{2}} \vert 1 \rangle.
 \]
 
 이 두 방정식은 하나의 공식으로 결합될 수 있습니다,
