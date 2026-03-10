@@ -13,6 +13,7 @@ toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 - 출처: [Deutsch's algorithm](https://quantum.cloud.ibm.com/learning/en/courses/fundamentals-of-quantum-algorithms/quantum-query-algorithms/deutsch-algorithm)
 
 **도이치 알고리즘**
+
 도이치 알고리즘은 $n=1$인 특별한 경우의 패리티 문제를 해결합니다.
 양자 컴퓨팅 맥락에서 이 문제는 때때로 **도이치 문제**라고 불리며, 우리는 이 강의에서 해당 용어를 따를 것입니다.
 

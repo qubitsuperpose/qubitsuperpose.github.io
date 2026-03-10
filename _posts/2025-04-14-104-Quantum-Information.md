@@ -808,15 +808,16 @@ $$
 
 6. 양자 비트 약속(quantum bit commitment) 프로토콜이 무조건적으로 안전하게 구현하는 것이 어렵다는 것을 정화의 유니타리 동등성이 어떻게 시사하나요? 
 > 이상적인 양자 비트 약속 프로토콜에서 앨리스는 비트를 약속한 후 이를 변경할 수 없어야 하며(binding), 밥은 앨리스가 공개하기 전까지 어떤 비트를 약속했는지 알 수 없어야 합니다(concealing). 정화의 유니타리 동등성은 만약 완벽하게 숨기는 약속 단계가 존재한다면, 밥의 시스템의 축소 상태가 약속된 비트에 관계없이 동일해야 함을 의미하며, 이는 앨리스가 자신의 시스템에 유니타리 연산을 적용하여 약속된 비트를 변경할 수 있음을 시사하여 binding 조건을 위반하게 됩니다.
+이는 완벽한 숨김은 약속된 묶임을 위반하게 만드는 모순이 발생.
 
 7. 휴스턴-요제프-우터스(HJW) 정리의 핵심 내용은 무엇인가요? 
-> HJW 정리는 시스템 XY의 순수 상태 $\|\Psi\rangle_{XY}$가 주어졌을 때, 시스템 X의 축소 상태 $\rho_X = \text{Tr}Y(\|\Psi\rangle\langle\Psi\|{XY})$를 순수 상태의 볼록 조합 $\rho_X = \sum_a p_a \|\phi_a\rangle\langle\phi_a\|_X$로 어떤 방식으로든 표현하더라도, 시스템 Y에 대한 측정 ${M_a}$가 존재하여 측정 결과 $a$가 나올 확률이 정확히 $p_a$이고, 그 결과에 따라 시스템 X의 상태가 정확히 $\|\phi_a\rangle_X$가 된다는 것입니다.
+> HJW 정리는 시스템 XY의 순수 상태 $\|\Psi\rangle_{XY}$가 주어졌을 때, 시스템 X의 축소 상태 $\rho_X = Tr_Y(\|\Psi\rangle\langle\Psi\|_{XY})$를 순수 상태의 볼록 조합 $\rho_X = \sum_a p_a \|\phi_a\rangle\langle\phi_a\|_X$로 어떤 방식으로든 표현하더라도, 시스템 Y에 대한 측정 ${M_a}$가 존재하여 측정 결과 $a$가 나올 확률이 정확히 $p_a$이고, 그 결과에 따라 시스템 X의 상태가 정확히 $\|\phi_a\rangle_X$가 된다는 것입니다.
 
 8. 두 밀도 행렬 $\rho$와 $\sigma$ 사이의 충실도(fidelity)의 정의를 쓰세요. 
 > $F(\rho, \sigma) = \text{Tr}\left( \sqrt{\sqrt{\rho} \sigma \sqrt{\rho}} \right)$
 
 9. 충실도의 주요 속성 중 세 가지를 나열하세요.
-> * $0 \le F(\rho, \sigma) \le 1$이며, $\rho = \sigma$일 때 $F(\rho, \sigma) = 1$이고, $\text{supp}(\rho) \perp \text{supp}(\sigma)$일 때 $F(\rho, \sigma) = 0$입니다.
+> * $0 \le F(\rho, \sigma) \le 1$이며, $\rho = \sigma$일 때 $F(\rho, \sigma) = 1$이고, $\text{supp}(\rho) \perp \text{supp}(\sigma)$일 때 $F(\rho, \sigma) = 0$입니다.($supp(\rho): \rho$가 존재하는 공간)
 >1. $F(\rho, \sigma) = F(\sigma, \rho)$ (대칭성).
 >2. 곱 상태에 대해 곱셈적입니다: $F(\rho_1 \otimes \rho_2, \sigma_1 \otimes \sigma_2) = F(\rho_1, \sigma_1) F(\rho_2, \sigma_2)$.
 >3. 양자 채널 $\mathcal{E}$에 대해 $F(\mathcal{E}(\rho), \mathcal{E}(\sigma)) \ge F(\rho, \sigma)$ (단조성).
@@ -913,7 +914,7 @@ $
     - 밀도 행렬은 $\rho = \sum_i p_i \|\psi_i\rangle\langle\psi_i\|$ 형태로 주어지며, 여기서 $p_i$는 확률입니다.
 
 4. 정화 (Purification): 
-    - 어떤 밀도 행렬 $\rho_X$로 표현되는 시스템 X의 혼합 상태에 대해, 더 큰 복합 시스템 XY의 순수 상태 $\|\Psi\rangle_{XY}$로서 부분 추적(partial trace) $\text{Tr}Y(\|\Psi\rangle\langle\Psi\|{XY}) = \rho_X$를 만족하는 상태입니다.
+    - 어떤 밀도 행렬 $\rho_X$로 표현되는 시스템 X의 혼합 상태에 대해, 더 큰 복합 시스템 XY의 순수 상태 $\|\Psi\rangle_{XY}$로서 부분 추적(partial trace) $Tr_Y(\|\Psi\rangle\langle\Psi\|_{XY}) = \rho_X$를 만족하는 상태입니다.
 
 5. 부분 추적 (Partial Trace): 
     - 복합 시스템의 일부 하위 시스템에 대해서만 추적 연산을 수행하는 것입니다. 나머지 하위 시스템의 상태를 얻을 수 있습니다.

@@ -142,7 +142,6 @@ p(y) =
 p(y) = \frac{1}{2^{2n}}
 \sum_{z\in\operatorname{range}(f)}
 \left\vert \sum_{x\in f^{-1}(\{z\})} (-1)^{x\cdot y} \right\vert^2.
-\tag{1}
 \]
 
 이 확률들을 더 단순화하기 위해, 임의의 $z\in\operatorname{range}(f)$ 선택에 대한 다음 값을 살펴보자.
