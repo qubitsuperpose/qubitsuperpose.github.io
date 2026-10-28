@@ -8,8 +8,6 @@ toc: true # 이 포스트에서 목차를 활성화
 toc_sticky: true # 목차를 고정할지 여부 (선택 사항)
 ---
 
-소스의 내용을 선형대수학에 입문하는 사람도 이해할 수 있게 쉽게 정리해줘
-
 ## 1. 선형대수학은 무엇인가요?
 - 출처: [Introduction to Linear Algebra: Systems of Linear Equations](https://www.youtube.com/watch?v=csgNflj69-Y&list=PLybg94GvOJ9En46TNCXL2n6SiqRc_iMB8&index=1)
 
